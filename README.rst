@@ -1,7 +1,8 @@
 Django Page Rating
-============
+==================
 
-A reusable Django app that allows to render "Was this content helpful" vote on your pages"
+A reusable Django app that allows to render "Was this content helpful" vote on 
+your pages.
 
 Installation
 ------------
@@ -17,8 +18,6 @@ To get the latest commit from GitHub
 .. code-block:: bash
 
     pip install -e git+git://github.com/bitmazk/django-page-rating.git#egg=page_rating
-
-TODO: Describe further installation steps (edit / remove the examples below):
 
 Add ``page_rating`` to your ``INSTALLED_APPS``
 
@@ -38,13 +37,6 @@ Add the ``page_rating`` URLs to your ``urls.py``
         url(r'^rating/', include('page_rating.urls')),
     )
 
-Before your tags/filters are available in your templates, load them by using
-
-.. code-block:: html
-
-	{% load page_rating_tags %}
-
-
 Don't forget to migrate your database
 
 .. code-block:: bash
@@ -55,8 +47,15 @@ Don't forget to migrate your database
 Usage
 -----
 
-TODO: Describe usage or point to docs. Also describe available settings and
-templatetags.
+Render the rating snippet in your templates like so:
+
+.. code-block:: html
+
+    {% load page_rating_tags %}
+    {% render_page_rating %}
+
+This is an inclusion tag which uses the template ``page_rating/rating.html``.
+Override this tempate if you want to change the look and feel.
 
 
 Contribute
