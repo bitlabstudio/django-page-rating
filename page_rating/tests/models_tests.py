@@ -1,10 +1,24 @@
 """Tests for the models of the page_rating app."""
 from django.test import TestCase
 
-# from .factories import YourModelFactory
+from .factories import RatingFactory, UserRatingFactory
 
 
-class DummyTestCase(TestCase):
-    """Sample test case to show that `python setup.py test` works."""
-    def test_something(self):
-        self.assertTrue(True)
+class RatingTestCase(TestCase):
+    """Tests for the ``Rating`` model class."""
+    longMessage = True
+
+    def test_instantiation(self):
+        """Test instantiation of the ``Rating`` model."""
+        rating = RatingFactory()
+        self.assertTrue(rating.pk)
+
+
+class UserRatingTestCase(TestCase):
+    """Tests for the ``UserRating`` model class."""
+    longMessage = True
+
+    def test_instantiation(self):
+        """Test instantiation of the ``UserRating`` model."""
+        userrating = UserRatingFactory()
+        self.assertTrue(userrating.pk)

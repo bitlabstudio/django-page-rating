@@ -5,6 +5,6 @@ django-jasmine
 ipdb
 flake8
 fabric
-factory_boy
+factory_boy>=2.0.0
 mock
 selenium
