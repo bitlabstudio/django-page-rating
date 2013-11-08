@@ -33,7 +33,7 @@ def render_rating(context, template_name=DEFAULT_TEMPLATE):
     # find out how many people found this page helpful
     total_votes = rating.upvotes + rating.downvotes
     try:
-        percentage = round(float(rating.upvotes) / float(total_votes) * 100, 2)
+        percentage = int(float(rating.upvotes) / float(total_votes) * 100)
     except ZeroDivisionError:
         percentage = None
 
