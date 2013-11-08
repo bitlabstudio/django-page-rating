@@ -9,40 +9,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Rating'
-        db.create_table(u'page_rating_rating', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('downvotes', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('page_query', self.gf('django.db.models.fields.CharField')(max_length=1024, blank=True)),
-            ('page_url', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('upvotes', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-        ))
-        db.send_create_signal(u'page_rating', ['Rating'])
-
-        # Adding unique constraint on 'Rating', fields ['page_query', 'page_url']
-        db.create_unique(u'page_rating_rating', ['page_query', 'page_url'])
-
-        # Adding model 'UserRating'
-        db.create_table(u'page_rating_userrating', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('creation_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('ip', self.gf('django.db.models.fields.GenericIPAddressField')(max_length=39, null=True, blank=True)),
-            ('is_positive', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('rating', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['page_rating.Rating'])),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-        ))
-        db.send_create_signal(u'page_rating', ['UserRating'])
+        # Adding field 'Rating.page_views'
+        db.add_column(u'page_rating_rating', 'page_views',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=1),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Rating', fields ['page_query', 'page_url']
-        db.delete_unique(u'page_rating_rating', ['page_query', 'page_url'])
-
-        # Deleting model 'Rating'
-        db.delete_table(u'page_rating_rating')
-
-        # Deleting model 'UserRating'
-        db.delete_table(u'page_rating_userrating')
+        # Deleting field 'Rating.page_views'
+        db.delete_column(u'page_rating_rating', 'page_views')
 
 
     models = {
@@ -88,6 +63,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'page_query': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'blank': 'True'}),
             'page_url': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
+            'page_views': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'upvotes': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
         },
         u'page_rating.userrating': {

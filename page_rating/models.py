@@ -31,6 +31,11 @@ class Rating(models.Model):
         max_length=512,
     )
 
+    page_views = models.PositiveIntegerField(
+        verbose_name=_('Page views'),
+        default=1,
+    )
+
     upvotes = models.PositiveIntegerField(
         verbose_name=_('Upvotes'),
         default=0,
