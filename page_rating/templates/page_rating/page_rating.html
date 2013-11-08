@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<form action="{% url "page_rating_submit" %}" method="post">
+    {% csrf_token %}
+    {% if already_voted %}
+        <span>{% trans "Thank you for your feedback." %}</span>
+    {% else %}
+        <span>{% trans "Was this page helpful?" %}</span>
+        <input type="submit" name="yes" value={% trans "YES" %} />
+        <input type="submit" name="no" value={% trans "NO" %} />
+        <input type="hidden" name="ip" value="{{ ip }}" />
+        <input type="hidden" name="page_query" value="{{ page_query }}" />
+        <input type="hidden" name="page_url" value="{{ request.path }}" />
+    {% endif %}
+    {% if percentage != None %}
+        {% blocktrans %}
+            <span>{{ percentage }}% of people found this helpful.</span>
+        {% endblocktrans %}
+    {% else %}
+        <span>{% trans "Be the first to vote on this page!" %}</span>
+    {% endif %}
+</form>
