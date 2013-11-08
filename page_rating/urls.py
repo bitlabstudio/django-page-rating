@@ -1,12 +1,11 @@
 """URLs for the page_rating app."""
-# from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url
 
-# from . import views
+from .views import RatingSubmitView
 
 
-# urlpatterns = patterns(
-#     '',
-#     url(r'^$',
-#         views.YourView.as_view(),
-#         name='page_rating_default'),
-# )
+urlpatterns = patterns(
+    '',
+    url(r'^rating-submit/$', RatingSubmitView.as_view(),
+        name='page_rating_submit'),
+)
