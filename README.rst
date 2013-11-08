@@ -1,7 +1,7 @@
 Django Page Rating
 ==================
 
-A reusable Django app that allows to render "Was this content helpful" vote on 
+A reusable Django app that allows to render "Was this content helpful" vote on
 your pages.
 
 Installation
@@ -44,18 +44,47 @@ Don't forget to migrate your database
     ./manage.py migrate page_rating
 
 
+Add ``django.core.context_processors.request`` to your
+``TEMPLATE_CONTEXT_PROCESSORS`` setting
+
+.. code-block:: python
+
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        # your other context processors
+        ...
+        'django.core.context_processors.request',
+    )
+
+
 Usage
 -----
 
-Render the rating snippet in your templates like so:
+Render the rating form snippet in your templates like so:
 
 .. code-block:: html
 
     {% load page_rating_tags %}
-    {% render_page_rating %}
+    {% render_rating %}
 
-This is an inclusion tag which uses the template ``page_rating/rating.html``.
-Override this tempate if you want to change the look and feel.
+This is a simple tag which renders the template ``page_rating/page_rating.html``
+per default.
+Override this template if you want to change the look and feel.
+
+If you want to use a standard template in a different location, you can set
+``PAGE_RATING_DEFAULT_TEMPLATE`` to a different path
+
+.. code-block:: python
+
+    PAGE_RATING_DEFAULT_TEMPLATE = 'myappname/this_template.html'
+
+
+If you want to be even more specific, you can also pass a custom template path
+to the template tag.
+
+.. code-block:: html
+
+    {% load page_rating_tags %}
+    {% render_rating "myappname/custom_rating_template.html" %}
 
 
 Contribute
